@@ -122,6 +122,12 @@ open class LUAutocompleteView: UIView {
 
         commonInit()
     }
+    
+        // MARK: - Public methods
+    
+    public func reload() {
+        getElements()
+    }
 
     // MARK: - Private Functions
 
