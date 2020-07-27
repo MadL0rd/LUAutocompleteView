@@ -64,12 +64,6 @@ open class LUAutocompleteView: UIView {
             tableView.rowHeight = rowHeight
         }
     }
-    
-    // MARK: - Public methods
-    
-    public func reload() {
-        getElements()
-    }
 
     // MARK: - Private Properties
 
@@ -129,7 +123,7 @@ open class LUAutocompleteView: UIView {
         commonInit()
     }
     
-        // MARK: - Public methods
+    // MARK: - Public methods
     
     public func reload() {
         getElements()
