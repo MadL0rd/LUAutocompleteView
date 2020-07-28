@@ -37,7 +37,6 @@ open class LUAutocompleteView: UIView {
             }
 
             textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
-            textField.addTarget(self, action: #selector(textFieldEditingEnded), for: .editingDidEnd)
 
             setupConstraints()
         }
@@ -192,9 +191,6 @@ open class LUAutocompleteView: UIView {
         }
     }
 
-    @objc private func textFieldEditingEnded() {
-        height = 0
-    }
 }
 
 // MARK: - UITableViewDataSource
