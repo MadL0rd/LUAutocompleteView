@@ -37,7 +37,6 @@ open class LUAutocompleteView: UIView {
             }
 
             textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
-            textField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: .editingDidEnd)
 
             setupConstraints()
         }
@@ -128,6 +127,10 @@ open class LUAutocompleteView: UIView {
     public func reload() {
         getElements()
     }
+    
+    @objc public func hide() {
+        height = 0
+    }
 
     // MARK: - Private Functions
 
@@ -175,10 +178,6 @@ open class LUAutocompleteView: UIView {
     @objc private func textFieldEditingChanged() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(getElements), object: nil)
         perform(#selector(getElements), with: nil, afterDelay: throttleTime)
-    }
-    
-    @objc private func textFieldEditingDidEnd() {
-        height = 0
     }
 
     @objc private func getElements() {
@@ -262,7 +261,7 @@ extension LUAutocompleteView: UITableViewDelegate {
         }
 
         if shouldHideAfterSelecting {
-            height = 0
+            hide()
         }
         textField?.text = elements[indexPath.row]
         delegate?.autocompleteView(self, didSelect: elements[indexPath.row])
