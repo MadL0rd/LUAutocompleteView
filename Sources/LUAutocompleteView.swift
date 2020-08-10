@@ -37,6 +37,7 @@ open class LUAutocompleteView: UIView {
             }
 
             textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
+            textField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: .editingDidEnd)
 
             setupConstraints()
         }
@@ -175,6 +176,10 @@ open class LUAutocompleteView: UIView {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(getElements), object: nil)
         perform(#selector(getElements), with: nil, afterDelay: throttleTime)
     }
+    
+    @objc private func textFieldEditingDidEnd() {
+        height = 0
+    }
 
     @objc private func getElements() {
         guard let dataSource = dataSource else {
@@ -253,7 +258,6 @@ extension LUAutocompleteView: UITableViewDelegate {
     */
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.row < elements.count else {
-            assertionFailure("Sanity check")
             return
         }
 
